@@ -1,0 +1,166 @@
+@import "tailwindcss";
+/*
+  ---break---
+*/
+@custom-variant dark (&:is(.dark *));
+
+@import "tw-animate-css";
+@import "../styles/accessibility.css";
+
+@variant dark (&:is(.dark *));
+
+@theme {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  /* Utility Colors */
+  --color-success: 142 76% 36%;
+  --color-warning: 38 92% 50%;
+  --color-info: 199 89% 48%;
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@layer utilities {
+  body {
+    font-family: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+  }
+  
+  .font-display {
+    font-family: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  
+  .gradient-text {
+    background: linear-gradient(135deg, var(--color-orange) 0%, var(--color-earth) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .gradient-warm {
+    background: linear-gradient(135deg, var(--color-light) 0%, var(--color-cream) 100%);
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .warm-shadow {
+    box-shadow: 0 8px 32px -8px rgba(212, 163, 115, 0.2), 0 0 0 1px rgba(212, 163, 115, 0.05);
+  }
+  
+  .earth-border {
+    border: 1px solid rgba(212, 163, 115, 0.3);
+  }
+  
+  .glass-effect {
+    backdrop-filter: blur(12px);
+    background: hsl(var(--background) / 0.8);
+  }
+}
+
+/* Theme transitions */
+@layer base {
+  * {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Override for specific elements that shouldn't transition */
+  input, textarea, select {
+    transition: none;
+  }
+}
+
+@layer base {
+  :root {
+    /* Verisona AI Single-Tone Earthy Color Palette */
+    --color-earth: #d4a373; /* A warm, grounded tan like aged parchment or sandstone. Used for primary CTAs and key highlights. */
+    --color-cream: #faedcd; /* A soft, creamy off-white. Used for secondary backgrounds and content cards. */
+    --color-light: #fefae0; /* The primary background color, light and airy, easy on the eyes. */
+    --color-text: #3a2e20;  /* A deep, rich brown for all body text, ensuring high readability and a less harsh feel than pure black. */
+    --color-orange: #ff6b35; /* Bright orange for bold emphasis and highlighting. Main color for bold, emphasizing, or highlighting. */
+    
+    /* Tailwind CSS Variables - Single Light Theme Only */
+    --background: 48 94% 94%; /* Light cream (#fefae0) */
+    --foreground: 30 28% 25%; /* Deep brown text (#3a2e20) */
+    --card: 42 77% 89%; /* Cream cards (#faedcd) */
+    --card-foreground: 30 28% 25%; /* Deep brown text on cards */
+    --popover: 42 77% 89%; /* Cream popover */
+    --popover-foreground: 30 28% 25%; /* Deep brown text */
+    --primary: 12 68% 56%; /* Bright orange (#ff6b35) for CTAs and highlights */
+    --primary-foreground: 0 0% 98%; /* White text on orange */
+    --secondary: 33 49% 63%; /* Warm earth tone (#d4a373) */
+    --secondary-foreground: 30 28% 25%; /* Deep brown text on earth tone */
+    --muted: 42 77% 89%; /* Cream muted backgrounds */
+    --muted-foreground: 30 20% 45%; /* Lighter brown for muted text */
+    --accent: 33 49% 63%; /* Earth tone accent */
+    --accent-foreground: 30 28% 25%; /* Deep brown text on accent */
+    --destructive: 0 84.2% 60.2%; /* Red for errors */
+    --destructive-foreground: 0 0% 98%; /* White text on red */
+    --border: 33 49% 80%; /* Light earth tone borders */
+    --input: 42 77% 89%; /* Cream input backgrounds */
+    --ring: 12 68% 56%; /* Orange focus rings */
+    --radius: 0.6rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Accessibility Styles Import */
+@import '../styles/accessibility.css';

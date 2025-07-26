@@ -1,0 +1,468 @@
+/* Accessibility Styles for Verisona AI Platform */
+/* WCAG 2.1 AA Compliance for underrepresented and low-income students */
+
+/* Screen Reader Only Content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  border: 2px solid theme('colors.primary.DEFAULT');
+  border-radius: theme('borderRadius.md');
+  background: theme('colors.primary.DEFAULT');
+  color: theme('colors.primary.foreground');
+  z-index: 999;
+}
+
+/* Skip Links */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 8px;
+  background: theme('colors.primary.DEFAULT');
+  color: theme('colors.primary.foreground');
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: theme('borderRadius.md');
+  z-index: 9999;
+  font-weight: 600;
+  transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+  top: 8px;
+}
+
+/* High Contrast Mode */
+.high-contrast {
+  --contrast-ratio: 1.5;
+  filter: contrast(var(--contrast-ratio));
+}
+
+.high-contrast button,
+.high-contrast .btn {
+  border: 2px solid currentColor !important;
+  font-weight: 600 !important;
+}
+
+.high-contrast input,
+.high-contrast select,
+.high-contrast textarea {
+  border: 2px solid theme('colors.foreground') !important;
+  background: theme('colors.background') !important;
+  color: theme('colors.foreground') !important;
+}
+
+.high-contrast input:focus,
+.high-contrast select:focus,
+.high-contrast textarea:focus {
+  outline: 3px solid theme('colors.primary.DEFAULT') !important;
+  outline-offset: 2px !important;
+}
+
+.high-contrast a {
+  text-decoration: underline !important;
+  text-underline-offset: 2px !important;
+}
+
+.high-contrast .card,
+.high-contrast .border {
+  border: 2px solid theme('colors.border') !important;
+}
+
+/* Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .motion-reduce-disable {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* Disable parallax and complex animations */
+  .parallax,
+  .slide-in,
+  .fade-in,
+  .bounce,
+  .wiggle {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* Focus Indicators */
+*:focus-visible {
+  outline: 3px solid theme('colors.primary.DEFAULT') !important;
+  outline-offset: 2px !important;
+  border-radius: theme('borderRadius.sm') !important;
+}
+
+/* Remove outline for mouse users but keep for keyboard users */
+*:focus:not(:focus-visible) {
+  outline: none !important;
+}
+
+/* Enhanced Focus for Interactive Elements */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid theme('colors.primary.DEFAULT') !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 5px rgba(59, 130, 246, 0.15) !important;
+}
+
+/* Focus within for containers */
+.focus-within:focus-within {
+  outline: 2px solid theme('colors.primary.DEFAULT');
+  outline-offset: 2px;
+}
+
+/* Large Text Mode */
+.text-large {
+  font-size: 1.125rem !important;
+  line-height: 1.6 !important;
+}
+
+.text-xl-custom {
+  font-size: 1.25rem !important;
+  line-height: 1.7 !important;
+}
+
+.text-xxl {
+  font-size: 1.5rem !important;
+  line-height: 1.8 !important;
+}
+
+/* Touch Target Improvements */
+@media (pointer: coarse) {
+  button,
+  .btn,
+  a,
+  input[type="checkbox"],
+  input[type="radio"],
+  select {
+    min-height: 44px !important;
+    min-width: 44px !important;
+  }
+  
+  /* Increase spacing between touch targets */
+  button + button,
+  .btn + .btn,
+  a + a {
+    margin-left: 8px !important;
+  }
+}
+
+/* Color Contrast Enhancements */
+.text-contrast-high {
+  color: theme('colors.foreground') !important;
+  font-weight: 600 !important;
+}
+
+.bg-contrast-high {
+  background-color: theme('colors.background') !important;
+  color: theme('colors.foreground') !important;
+}
+
+/* Error States with Better Contrast */
+.error-high-contrast {
+  color: #dc2626 !important;
+  background: #fef2f2 !important;
+  border-color: #dc2626 !important;
+  font-weight: 600 !important;
+}
+
+.success-high-contrast {
+  color: #059669 !important;
+  background: #f0fdf4 !important;
+  border-color: #059669 !important;
+  font-weight: 600 !important;
+}
+
+/* Loading States with Better Accessibility */
+.loading-accessible {
+  position: relative;
+}
+
+.loading-accessible::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid theme('colors.muted.foreground');
+  border-top-color: theme('colors.primary.DEFAULT');
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Simplified Mode for Low-Resource Devices */
+.simplified-mode {
+  font-family: system-ui, -apple-system, sans-serif !important;
+}
+
+.simplified-mode * {
+  animation: none !important;
+  transition: none !important;
+  box-shadow: none !important;
+  border-radius: 4px !important;
+}
+
+.simplified-mode .complex-animation,
+.simplified-mode .decorative-element,
+.simplified-mode .gradient,
+.simplified-mode .shadow {
+  display: none !important;
+}
+
+.simplified-mode button,
+.simplified-mode .btn {
+  background: theme('colors.primary.DEFAULT') !important;
+  color: theme('colors.primary.foreground') !important;
+  border: 1px solid theme('colors.primary.DEFAULT') !important;
+  padding: 8px 16px !important;
+}
+
+/* Battery Saver Mode */
+.battery-saver {
+  filter: contrast(1.1) brightness(0.9) !important;
+}
+
+.battery-saver .energy-intensive,
+.battery-saver video,
+.battery-saver .auto-refresh {
+  display: none !important;
+}
+
+.battery-saver * {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Screen Reader Announcements */
+[aria-live] {
+  position: absolute !important;
+  left: -10000px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+}
+
+/* Form Error Announcements */
+.form-error-announcement {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Keyboard Navigation Improvements */
+.keyboard-navigation [tabindex="0"]:focus,
+.keyboard-navigation button:focus,
+.keyboard-navigation a:focus {
+  outline: 3px solid theme('colors.primary.DEFAULT') !important;
+  outline-offset: 2px !important;
+  background: rgba(59, 130, 246, 0.1) !important;
+}
+
+/* Progress Indicators with Better Accessibility */
+.progress-accessible {
+  position: relative;
+  background: theme('colors.muted.DEFAULT');
+  border-radius: theme('borderRadius.full');
+  overflow: hidden;
+}
+
+.progress-accessible::after {
+  content: attr(aria-valuenow) '%';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: theme('colors.foreground');
+  z-index: 1;
+}
+
+/* Dark Mode Accessibility Improvements */
+@media (prefers-color-scheme: dark) {
+  .auto-dark-mode {
+    --border-contrast: rgba(255, 255, 255, 0.2);
+    --text-contrast: rgba(255, 255, 255, 0.9);
+  }
+  
+  .auto-dark-mode input,
+  .auto-dark-mode select,
+  .auto-dark-mode textarea {
+    border-color: var(--border-contrast) !important;
+    color: var(--text-contrast) !important;
+  }
+}
+
+/* Print Accessibility */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-visible {
+    display: block !important;
+  }
+  
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+  
+  a[href^="#"]::after,
+  a[href^="javascript:"]::after {
+    content: "";
+  }
+}
+
+/* Language Support */
+[dir="rtl"] {
+  text-align: right;
+}
+
+[dir="rtl"] .ltr-only {
+  direction: ltr;
+  text-align: left;
+}
+
+/* Tooltip Accessibility */
+.tooltip-accessible {
+  position: relative;
+  cursor: help;
+}
+
+.tooltip-accessible:hover::after,
+.tooltip-accessible:focus::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: theme('colors.popover.DEFAULT');
+  color: theme('colors.popover.foreground');
+  padding: 8px 12px;
+  border-radius: theme('borderRadius.md');
+  font-size: 0.875rem;
+  white-space: nowrap;
+  z-index: 1000;
+  border: 1px solid theme('colors.border');
+}
+
+/* Mobile Accessibility Improvements */
+@media (max-width: 768px) {
+  .mobile-accessible button,
+  .mobile-accessible .btn,
+  .mobile-accessible a {
+    min-height: 48px !important;
+    min-width: 48px !important;
+    font-size: 1rem !important;
+  }
+  
+  .mobile-accessible input,
+  .mobile-accessible select,
+  .mobile-accessible textarea {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+    min-height: 48px !important;
+  }
+}
+
+/* Windows High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  * {
+    border-color: ButtonText !important;
+    color: ButtonText !important;
+  }
+  
+  button {
+    border: 2px solid ButtonText !important;
+    background: ButtonFace !important;
+    color: ButtonText !important;
+  }
+  
+  button:hover,
+  button:focus {
+    background: Highlight !important;
+    color: HighlightText !important;
+  }
+  
+  input,
+  select,
+  textarea {
+    border: 2px solid ButtonText !important;
+    background: Field !important;
+    color: FieldText !important;
+  }
+}
+
+/* Error and Success States for Screen Readers */
+.sr-error::before {
+  content: "Error: ";
+  font-weight: bold;
+}
+
+.sr-success::before {
+  content: "Success: ";
+  font-weight: bold;
+}
+
+.sr-warning::before {
+  content: "Warning: ";
+  font-weight: bold;
+}
+
+/* Responsive Text Scaling */
+@media (max-width: 480px) {
+  .responsive-text {
+    font-size: 1.1rem !important;
+    line-height: 1.5 !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .responsive-text {
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+  }
+}

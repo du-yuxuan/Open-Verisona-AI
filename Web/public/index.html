@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verisona AI - Your story is your strength</title>
+    <link rel="stylesheet" href="https://static.paraflowcontent.com/public/css/font-awesome/font-awesome.672.css">
+    <script src="https://static.paraflowcontent.com/public/js/tailwind/tailwind.js"></script>
+    <link rel="stylesheet" href="./paraflow/styles.css">
+    <style>
+        :root {
+            --color-earth: #d4a373;
+            --color-cream: #faedcd;
+            --color-light: #fefae0;
+            --color-text: #3a2e20;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, var(--color-light) 0%, var(--color-cream) 100%);
+        }
+
+        .constellation-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="BODY-cc8c364fd9f6c8881d4c9e3185da6d2b">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white shadow-sm">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <img src="logo.png" alt="Verisona AI" class="h-8 w-auto">
+                    <span class="ml-2 H3-fa376d3dcd46443bbe8be278b14d7223">Verisona AI</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#" class="nav-link-active">Homepage</a>
+                    <a href="./how-it-works.html" class="nav-link">How It Works</a>
+                    <a href="./platform.html" class="nav-link">The Platform</a>
+                    <a href="./mission.html" class="nav-link">Our Mission & Ethics</a>
+                    <a href="./pricing.html" class="nav-link">Pricing</a>
+                </div>
+                <div class="flex space-x-4">
+                    <button class="secondary-button">Login</button>
+                    <button class="primary-button">Sign Up</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="fade-in">
+                    <h1 class="H1-0d2519cad13de0a04be114e8b96aec48 mb-6">Your story is your strength</h1>
+                    <p class="featured-text mb-8">Our revolutionary AI platform helps you discover your unique persona
+                        and craft an application that showcases who you truly are—not just your test scores.</p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="primary-button text-lg px-8 py-4">Get Started Free</button>
+                        <button class="secondary-button text-lg px-8 py-4">Learn More</button>
+                    </div>
+                </div>
+                <div class="constellation-animation">
+                    <div class="relative w-full h-96 bg-white rounded-lg shadow-lg p-8">
+                        <div class="text-center">
+                            <h3 class="H3-fa376d3dcd46443bbe8be278b14d7223 mb-4">Your Persona Constellation</h3>
+                            <div class="relative mx-auto w-64 h-64 constellation-preview">
+                                <!-- Constellation visualization with blur effect -->
+                                <div class="constellation-content">
+                                    <div class="constellation-dot" style="top: 20%; left: 30%;"></div>
+                                    <div class="constellation-dot" style="top: 40%; left: 70%;"></div>
+                                    <div class="constellation-dot" style="top: 60%; left: 20%;"></div>
+                                    <div class="constellation-dot" style="top: 80%; left: 60%;"></div>
+                                    <div class="constellation-dot" style="top: 30%; left: 50%;"></div>
+                                    <div class="constellation-line"
+                                        style="top: 25%; left: 32%; width: 18%; transform: rotate(45deg);"></div>
+                                    <div class="constellation-line"
+                                        style="top: 45%; left: 40%; width: 15%; transform: rotate(-30deg);"></div>
+                                    <div class="constellation-line"
+                                        style="top: 65%; left: 35%; width: 20%; transform: rotate(60deg);"></div>
+                                </div>
+                                <!-- Login overlay -->
+                                <div class="constellation-overlay">
+                                    <div class="overlay-content">
+                                        <i class="fas fa-lock text-3xl mb-3" style="color: var(--color-earth);"></i>
+                                        <h4 class="H4-c3aff706b8e6b0f992df6d15ec68b197 mb-2">Get Started to Get Your Personal Constellation</h4>
+                                        <p class="text-sm text-gray-600 mb-4">Unlock your unique personality visualization</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-sm mt-4">Discover your unique strengths and personality traits</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Statement Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="H2-04084d0474dba493c499c7276763092b mb-6">The Admissions Game is Stacked</h2>
+                    <h3 class="H3-fa376d3dcd46443bbe8be278b14d7223 mb-4">More Than Just Numbers</h3>
+                    <p class="mb-6">Getting into college is challenging, especially for students from underrepresented
+                        backgrounds. The system often favors those with access to expensive extracurriculars and test
+                        prep, overlooking incredible students whose strengths aren't measured by a score, as well as
+                        students with potential but do not have the resources to apply it.</p>
+                    <p class="mb-6">But colleges themselves want to see more; they are looking for character,
+                        resilience, leadership, and initiative. The problem isn't your potential—it's how the current
+                        system fails to recognize and showcase it.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="text-center">
+                            <h4 class="H4-c3aff706b8e6b0f992df6d15ec68b197 mb-2 text-gray-500">Traditional Metrics</h4>
+                            <div class="space-y-2">
+                                <div class="bg-gray-200 px-3 py-1 rounded text-sm">GPA: 3.8</div>
+                                <div class="bg-gray-200 px-3 py-1 rounded text-sm">SAT: 1450</div>
+                                <div class="bg-gray-200 px-3 py-1 rounded text-sm">AP Classes: 5</div>
+                            </div>
+                        </div>
+                        <div class="text-4xl text-gray-400">⚖️</div>
+                        <div class="text-center">
+                            <h4 class="H4-c3aff706b8e6b0f992df6d15ec68b197 mb-2" style="color: var(--color-earth);">What
+                                Really Matters</h4>
+                            <div class="space-y-2">
+                                <div class="bg-orange-100 px-3 py-1 rounded text-sm"
+                                    style="background-color: var(--color-cream);">Resilience</div>
+                                <div class="bg-orange-100 px-3 py-1 rounded text-sm"
+                                    style="background-color: var(--color-cream);">Creativity</div>
+                                <div class="bg-orange-100 px-3 py-1 rounded text-sm"
+                                    style="background-color: var(--color-cream);">Empathy</div>
+                                <div class="bg-orange-100 px-3 py-1 rounded text-sm"
+                                    style="background-color: var(--color-cream);">Leadership</div>
+                                <div class="bg-orange-100 px-3 py-1 rounded text-sm"
+                                    style="background-color: var(--color-cream);">Initiative</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Introduction Section -->
+    <section class="py-16 hero-gradient">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="H2-04084d0474dba493c499c7276763092b mb-6">Introducing the AI Admissions Team</h2>
+                <p class="featured-text max-w-3xl mx-auto mb-8">Our revolutionary multi-agent AI system features
+                    specialized agents that collaborate and debate to uncover your unique strengths and build a powerful
+                    application strategy around them. This is mentorship, reimagined.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div class="agent-card text-center">
+                    <div class="agent-icon-container">
+                        <i class="fas fa-user-circle text-2xl"></i>
+                    </div>
+                    <h4 class="H4-c3aff706b8e6b0f992df6d15ec68b197 mb-2">Erikson Identity Mapper</h4>
+                    <p class="text-sm">Maps your developmental journey and identity formation</p>
+                </div>
+                <div class="agent-card text-center">
+                    <div class="agent-icon-container">
+                        <i class="fas fa-brain text-2xl"></i>
+                    </div>
+                    <h4 class="H4-c3aff706b8e6b0f992df6d15ec68b197 mb-2">Gardner Intelligence Profiler</h4>
+                    <p class="text-sm">Identifies your multiple intelligence patterns</p>
+                </div>
+                <div class="agent-card text-center">
+                    <div class="agent-icon-container">
+                        <i class="fas fa-book-open text-2xl"></i>
+                    </div>
+                    <h4 class="H4-c3aff706b8e6b0f992df6d15ec68b197 mb-2">Narrative Psychologist</h4>
+                    <p class="text-sm">Crafts compelling stories from your experiences</p>
+                </div>
+                <div class="agent-card text-center">
+                    <div class="agent-icon-container">
+                        <i class="fas fa-graduation-cap text-2xl"></i>
+                    </div>
+                    <h4 class="H4-c3aff706b8e6b0f992df6d15ec68b197 mb-2">Vygotsky Scaffolder</h4>
+                    <p class="text-sm">Provides personalized learning support structure</p>
+                </div>
+                <div class="agent-card text-center">
+                    <div class="agent-icon-container">
+                        <i class="fas fa-lightbulb text-2xl"></i>
+                    </div>
+                    <h4 class="H4-c3aff706b8e6b0f992df6d15ec68b197 mb-2">Cognitive Re-framer</h4>
+                    <p class="text-sm">Transforms challenges into compelling strengths</p>
+                </div>
+                <div class="agent-card text-center">
+                    <div class="agent-icon-container">
+                        <i class="fas fa-chess text-2xl"></i>
+                    </div>
+                    <h4 class="H4-c3aff706b8e6b0f992df6d15ec68b197 mb-2">Admissions Strategist</h4>
+                    <p class="text-sm">Optimizes your application for maximum impact</p>
+                </div>
+                <div class="agent-card text-center">
+                    <div class="agent-icon-container">
+                        <i class="fas fa-puzzle-piece text-2xl"></i>
+                    </div>
+                    <h4 class="H4-c3aff706b8e6b0f992df6d15ec68b197 mb-2">Synthesis Weaver</h4>
+                    <p class="text-sm">Integrates all insights into a cohesive narrative</p>
+                </div>
+            </div>
+            <div class="text-center">
+                <p class="text-sm text-gray-600 mb-4">These agents engage in structured debates to ensure your final
+                    application strategy is thoroughly vetted and authentically represents your unique story.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Overview -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="H2-04084d0474dba493c499c7276763092b mb-6">How It Works</h2>
+                <p class="featured-text max-w-3xl mx-auto">Our simple, step-by-step process guides you from
+                    self-discovery to college application success.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="process-step-card">
+                    <div class="process-step-number">1</div>
+                    <h3 class="H3-fa376d3dcd46443bbe8be278b14d7223 mb-4 mt-4">Share Your Story</h3>
+                    <p class="mb-4">Answer our holistic questionnaire, designed using principles from developmental
+                        psychology and narrative therapy to understand you deeply.</p>
+                    <p class="text-sm text-gray-600">You'll also provide your activities, GPA, SAT/ACT scores, and
+                        estimated course grades. No detail is too small—from family responsibilities to personal
+                        hobbies.</p>
+                </div>
+                <div class="process-step-card">
+                    <div class="process-step-number">2</div>
+                    <h3 class="H3-fa376d3dcd46443bbe8be278b14d7223 mb-4 mt-4">Witness Your Cognitive Blueprint Emerge
+                    </h3>
+                    <p class="mb-4">Our seven-agent AI team analyzes your profile from every angle. They identify your
+                        unique intelligences, map your developmental journey, and reframe your experiences into powerful
+                        strengths.</p>
+                    <p class="text-sm text-gray-600">They then debate the most compelling narrative arcs to build a
+                        rich, interconnected understanding of your character. You get a transparent summary of their
+                        analysis.</p>
+                </div>
+                <div class="process-step-card">
+                    <div class="process-step-number">3</div>
+                    <h3 class="H3-fa376d3dcd46443bbe8be278b14d7223 mb-4 mt-4">Visualize Your Potential</h3>
+                    <p class="mb-4">Get a comprehensive, structured plan covering your core narrative, detailed essay
+                        scaffold, strategic activity framing, and tailored college list.</p>
+                    <p class="text-sm text-gray-600">This includes stunning point cloud and 3D mind map visualizations
+                        of your cognitive and personality blueprint.</p>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="./how-it-works.html" class="primary-button text-lg px-8 py-4">Learn More About Our Process</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 hero-gradient">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="H2-04084d0474dba493c499c7276763092b mb-6">Success Stories</h2>
+                <p class="featured-text max-w-3xl mx-auto">Hear from students, parents, and counselors who have
+                    experienced the power of authentic storytelling.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="white-card">
+                    <div class="mb-4">
+                        <div class="flex items-center mb-2">
+                            <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                            <div>
+                                <h4 class="H4-c3aff706b8e6b0f992df6d15ec68b197">Maria S.</h4>
+                                <p class="text-sm text-gray-600">High School Senior</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p>"Verisona AI helped me discover strengths I didn't even know I had. My essays finally felt like
+                        me, and I got into my dream school!"</p>
+                </div>
+                <div class="white-card">
+                    <div class="mb-4">
+                        <div class="flex items-center mb-2">
+                            <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                            <div>
+                                <h4 class="H4-c3aff706b8e6b0f992df6d15ec68b197">David L.</h4>
+                                <p class="text-sm text-gray-600">Parent</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p>"As a first-generation college family, we were lost. Verisona AI gave us the guidance we needed
+                        and helped our son find his voice."</p>
+                </div>
+                <div class="white-card">
+                    <div class="mb-4">
+                        <div class="flex items-center mb-2">
+                            <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                            <div>
+                                <h4 class="H4-c3aff706b8e6b0f992df6d15ec68b197">Ms. Johnson</h4>
+                                <p class="text-sm text-gray-600">School Counselor</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p>"With 400 students, I can't give everyone individual attention. Verisona AI helps me support each
+                        student's unique journey."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+            <h2 class="H1-0d2519cad13de0a04be114e8b96aec48 mb-6">Ready to Build an Application That's Genuinely You?
+            </h2>
+            <p class="featured-text mb-8">Turn your personal story into your most powerful asset. Get the same quality
+                of guidance that was once only available to the privileged. Join the movement toward authentic,
+                equitable college admissions.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+                <button class="primary-button text-lg px-12 py-4">Discover Your Core Persona</button>
+                <button class="secondary-button text-lg px-12 py-4">See How It Works</button>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-6 max-w-2xl mx-auto">
+                <h3 class="H4-c3aff706b8e6b0f992df6d15ec68b197 mb-4">What You'll Get:</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <div class="flex items-center">
+                        <i class="fas fa-check text-green-600 mr-2"></i>
+                        <span>Your unique Persona Constellation</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-check text-green-600 mr-2"></i>
+                        <span>AI-powered essay guidance</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-check text-green-600 mr-2"></i>
+                        <span>Strategic activity optimization</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-check text-green-600 mr-2"></i>
+                        <span>Perfect-fit college recommendations</span>
+                    </div>
+                </div>
+            </div>
+            <p class="text-sm mt-4 text-gray-600">No credit card required • Start free today • Join 75% first-generation
+                college students already using Verisona AI</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <img src="logo.png" alt="Verisona AI" class="h-8 w-auto">
+                        <span class="ml-2 H3-fa376d3dcd46443bbe8be278b14d7223">Verisona AI</span>
+                    </div>
+                    <p class="text-gray-400">Empowering students to discover their authentic voice and achieve their
+                        college dreams.</p>
+                </div>
+                <div>
+                    <h4 class="H4-c3aff706b8e6b0f992df6d15ec68b197 mb-4">Product</h4>
+                    <ul class="space-y-2">
+                        <li><a href="./how-it-works.html" class="text-gray-400 hover:text-white">How It Works</a></li>
+                        <li><a href="./platform.html" class="text-gray-400 hover:text-white">The Platform</a></li>
+                        <li><a href="./pricing.html" class="text-gray-400 hover:text-white">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="H4-c3aff706b8e6b0f992df6d15ec68b197 mb-4">Company</h4>
+                    <ul class="space-y-2">
+                        <li><a href="./mission.html" class="text-gray-400 hover:text-white">Our Mission</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="H4-c3aff706b8e6b0f992df6d15ec68b197 mb-4">Support</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2025 Verisona AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function () {
+            // Add smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

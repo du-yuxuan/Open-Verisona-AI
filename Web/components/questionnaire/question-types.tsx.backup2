@@ -1,0 +1,602 @@
+'use client';
+
+import React, { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Card, CardContent } from '@/components/ui/card';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Textarea } from '@/components/ui/textarea';
+import { Slider } from '@/components/ui/slider';
+import { Checkbox } from '@/components/ui/checkbox';
+import { type Question, type QuestionOption, type ScaleConfig } from '@/lib/db/schema';
+
+interface QuestionComponentProps {
+  question: Question;
+  value?: any;
+  onChange: (value: any) => void;
+  onNext?: () => void;
+  onPrevious?: () => void;
+  isRequired?: boolean;
+  showNavigation?: boolean;
+  isLoading?: boolean;
+}
+
+// Multiple Choice Component
+export function MultipleChoiceQuestion({ 
+  question, 
+  value, 
+  onChange, 
+  onNext, 
+  onPrevious, 
+  showNavigation = true,
+  isLoading = false 
+}: QuestionComponentProps) {
+  const options = question.options as { choices: QuestionOption[], allowMultiple?: boolean };
+  const [selectedValues, setSelectedValues] = useState<string[]>(
+    Array.isArray(value) ? value : value ? [value] : []
+  );
+
+  const handleSingleSelect = (selectedValue: string) => {
+    setSelectedValues([selectedValue]);
+    onChange(selectedValue);
+  };
+
+  const handleMultipleSelect = (selectedValue: string, checked: boolean) => {
+    const newValues = checked
+      ? [...selectedValues, selectedValue]
+      : selectedValues.filter(v => v !== selectedValue);
+    
+    setSelectedValues(newValues);
+    onChange(newValues);
+  };
+
+  return (
+    <Card className=\"w-full max-w-2xl mx-auto\">
+      <CardContent className=\"p-6\">
+        <div className=\"space-y-6\">
+          <div>
+            <h3 className=\"text-lg font-semibold text-foreground mb-2\">
+              {question.questionText}
+            </h3>
+            {question.isRequired && (
+              <p className=\"text-sm text-muted-foreground mb-4\">* Required</p>
+            )}
+          </div>
+
+          {options.allowMultiple ? (
+            <div className=\"space-y-3\">
+              {options.choices.map((option) => (
+                <div key={option.value} className=\"flex items-start space-x-3\">
+                  <Checkbox
+                    id={`option-${option.value}`}
+                    checked={selectedValues.includes(String(option.value))}
+                    onCheckedChange={(checked) => 
+                      handleMultipleSelect(String(option.value), checked as boolean)
+                    }
+                    disabled={isLoading}
+                  />
+                  <div className=\"flex-1\">
+                    <Label 
+                      htmlFor={`option-${option.value}`}
+                      className=\"text-sm font-normal cursor-pointer\"
+                    >
+                      {option.label}
+                    </Label>
+                    {option.description && (
+                      <p className=\"text-xs text-muted-foreground mt-1\">
+                        {option.description}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <RadioGroup
+              value={selectedValues[0] || ''}
+              onValueChange={handleSingleSelect}
+              disabled={isLoading}
+            >
+              {options.choices.map((option) => (
+                <div key={option.value} className=\"flex items-start space-x-3\">
+                  <RadioGroupItem
+                    id={`option-${option.value}`}
+                    value={String(option.value)}
+                  />
+                  <div className=\"flex-1\">
+                    <Label 
+                      htmlFor={`option-${option.value}`}
+                      className=\"text-sm font-normal cursor-pointer\"
+                    >
+                      {option.label}
+                    </Label>
+                    {option.description && (
+                      <p className=\"text-xs text-muted-foreground mt-1\">
+                        {option.description}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </RadioGroup>
+          )}
+
+          {showNavigation && (
+            <div className=\"flex justify-between pt-4\">
+              <Button
+                variant=\"outline\"
+                onClick={onPrevious}
+                disabled={isLoading}
+                className=\"rounded-full\"
+              >
+                Previous
+              </Button>
+              <Button
+                onClick={onNext}
+                disabled={isLoading || (question.isRequired && selectedValues.length === 0)}
+                className=\"rounded-full\"
+              >
+                Next
+              </Button>
+            </div>
+          )}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+// Scale/Slider Component
+export function ScaleQuestion({ 
+  question, 
+  value, 
+  onChange, 
+  onNext, 
+  onPrevious, 
+  showNavigation = true,
+  isLoading = false 
+}: QuestionComponentProps) {
+  const scaleConfig = question.options as { scale: ScaleConfig };
+  const [currentValue, setCurrentValue] = useState<number>(
+    typeof value === 'number' ? value : scaleConfig.scale.min
+  );
+
+  const handleValueChange = (newValue: number[]) => {
+    const val = newValue[0];
+    setCurrentValue(val);
+    onChange(val);
+  };
+
+  return (
+    <Card className=\"w-full max-w-2xl mx-auto\">
+      <CardContent className=\"p-6\">
+        <div className=\"space-y-6\">
+          <div>
+            <h3 className=\"text-lg font-semibold text-foreground mb-2\">
+              {question.questionText}
+            </h3>
+            {question.isRequired && (
+              <p className=\"text-sm text-muted-foreground mb-4\">* Required</p>
+            )}
+          </div>
+
+          <div className=\"space-y-4\">
+            <div className=\"px-2\">
+              <Slider
+                value={[currentValue]}
+                onValueChange={handleValueChange}
+                min={scaleConfig.scale.min}
+                max={scaleConfig.scale.max}
+                step={scaleConfig.scale.step || 1}
+                disabled={isLoading}
+                className=\"w-full\"
+              />
+            </div>
+            
+            <div className=\"flex justify-between text-sm text-muted-foreground px-2\">
+              <span>{scaleConfig.scale.labels?.[scaleConfig.scale.min] || scaleConfig.scale.min}</span>
+              <span className=\"font-medium text-primary\">{currentValue}</span>
+              <span>{scaleConfig.scale.labels?.[scaleConfig.scale.max] || scaleConfig.scale.max}</span>
+            </div>
+
+            {scaleConfig.scale.labels && (
+              <div className=\"text-center\">
+                <p className=\"text-sm text-muted-foreground\">
+                  {scaleConfig.scale.labels[currentValue] || ''}
+                </p>
+              </div>
+            )}
+          </div>
+
+          {showNavigation && (
+            <div className=\"flex justify-between pt-4\">
+              <Button
+                variant=\"outline\"
+                onClick={onPrevious}
+                disabled={isLoading}
+                className=\"rounded-full\"
+              >
+                Previous
+              </Button>
+              <Button
+                onClick={onNext}
+                disabled={isLoading}
+                className=\"rounded-full\"
+              >
+                Next
+              </Button>
+            </div>
+          )}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+// Text Input Component
+export function TextQuestion({ 
+  question, 
+  value, 
+  onChange, 
+  onNext, 
+  onPrevious, 
+  showNavigation = true,
+  isLoading = false 
+}: QuestionComponentProps) {
+  const [textValue, setTextValue] = useState<string>(value || '');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    setTextValue(newValue);
+    onChange(newValue);
+  };
+
+  return (
+    <Card className=\"w-full max-w-2xl mx-auto\">
+      <CardContent className=\"p-6\">
+        <div className=\"space-y-6\">
+          <div>
+            <h3 className=\"text-lg font-semibold text-foreground mb-2\">
+              {question.questionText}
+            </h3>
+            {question.isRequired && (
+              <p className=\"text-sm text-muted-foreground mb-4\">* Required</p>
+            )}
+          </div>
+
+          <div>
+            <Input
+              value={textValue}
+              onChange={handleChange}
+              placeholder=\"Enter your answer...\"
+              disabled={isLoading}
+              className=\"w-full\"
+            />
+          </div>
+
+          {showNavigation && (
+            <div className=\"flex justify-between pt-4\">
+              <Button
+                variant=\"outline\"
+                onClick={onPrevious}
+                disabled={isLoading}
+                className=\"rounded-full\"
+              >
+                Previous
+              </Button>
+              <Button
+                onClick={onNext}
+                disabled={isLoading || (question.isRequired && !textValue.trim())}
+                className=\"rounded-full\"
+              >
+                Next
+              </Button>
+            </div>
+          )}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+// Textarea Component
+export function TextareaQuestion({ 
+  question, 
+  value, 
+  onChange, 
+  onNext, 
+  onPrevious, 
+  showNavigation = true,
+  isLoading = false 
+}: QuestionComponentProps) {
+  const options = question.options as { maxLength?: number, placeholder?: string };
+  const [textValue, setTextValue] = useState<string>(value || '');
+
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newValue = e.target.value;
+    if (options.maxLength && newValue.length > options.maxLength) return;
+    
+    setTextValue(newValue);
+    onChange(newValue);
+  };
+
+  return (
+    <Card className=\"w-full max-w-2xl mx-auto\">
+      <CardContent className=\"p-6\">
+        <div className=\"space-y-6\">
+          <div>
+            <h3 className=\"text-lg font-semibold text-foreground mb-2\">
+              {question.questionText}
+            </h3>
+            {question.isRequired && (
+              <p className=\"text-sm text-muted-foreground mb-4\">* Required</p>
+            )}
+          </div>
+
+          <div className=\"space-y-2\">
+            <Textarea
+              value={textValue}
+              onChange={handleChange}
+              placeholder={options.placeholder || \"Share your thoughts...\"}
+              disabled={isLoading}
+              className=\"w-full min-h-[120px] resize-none\"
+              rows={5}
+            />
+            {options.maxLength && (
+              <div className=\"flex justify-between text-xs text-muted-foreground\">
+                <span>Be thoughtful and specific in your response</span>
+                <span>{textValue.length}/{options.maxLength}</span>
+              </div>
+            )}
+          </div>
+
+          {showNavigation && (
+            <div className=\"flex justify-between pt-4\">
+              <Button
+                variant=\"outline\"
+                onClick={onPrevious}
+                disabled={isLoading}
+                className=\"rounded-full\"
+              >
+                Previous
+              </Button>
+              <Button
+                onClick={onNext}
+                disabled={isLoading || (question.isRequired && !textValue.trim())}
+                className=\"rounded-full\"
+              >
+                Next
+              </Button>
+            </div>
+          )}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+// Boolean/Yes-No Component
+export function BooleanQuestion({ 
+  question, 
+  value, 
+  onChange, 
+  onNext, 
+  onPrevious, 
+  showNavigation = true,
+  isLoading = false 
+}: QuestionComponentProps) {
+  const [selectedValue, setSelectedValue] = useState<string>(
+    typeof value === 'boolean' ? (value ? 'yes' : 'no') : value || ''
+  );
+
+  const handleSelect = (val: string) => {
+    setSelectedValue(val);
+    onChange(val === 'yes');
+  };
+
+  return (
+    <Card className=\"w-full max-w-2xl mx-auto\">
+      <CardContent className=\"p-6\">
+        <div className=\"space-y-6\">
+          <div>
+            <h3 className=\"text-lg font-semibold text-foreground mb-2\">
+              {question.questionText}
+            </h3>
+            {question.isRequired && (
+              <p className=\"text-sm text-muted-foreground mb-4\">* Required</p>
+            )}
+          </div>
+
+          <RadioGroup
+            value={selectedValue}
+            onValueChange={handleSelect}
+            disabled={isLoading}
+          >
+            <div className=\"flex items-center space-x-3\">
+              <RadioGroupItem id=\"yes\" value=\"yes\" />
+              <Label htmlFor=\"yes\" className=\"cursor-pointer\">Yes</Label>
+            </div>
+            <div className=\"flex items-center space-x-3\">
+              <RadioGroupItem id=\"no\" value=\"no\" />
+              <Label htmlFor=\"no\" className=\"cursor-pointer\">No</Label>
+            </div>
+          </RadioGroup>
+
+          {showNavigation && (
+            <div className=\"flex justify-between pt-4\">
+              <Button
+                variant=\"outline\"
+                onClick={onPrevious}
+                disabled={isLoading}
+                className=\"rounded-full\"
+              >
+                Previous
+              </Button>
+              <Button
+                onClick={onNext}
+                disabled={isLoading || (question.isRequired && !selectedValue)}
+                className=\"rounded-full\"
+              >
+                Next
+              </Button>
+            </div>
+          )}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+// Ranking Component
+export function RankingQuestion({ 
+  question, 
+  value, 
+  onChange, 
+  onNext, 
+  onPrevious, 
+  showNavigation = true,
+  isLoading = false 
+}: QuestionComponentProps) {
+  const options = question.options as { items: QuestionOption[] };
+  const [rankedItems, setRankedItems] = useState<string[]>(
+    Array.isArray(value) ? value : []
+  );
+  const [availableItems, setAvailableItems] = useState<QuestionOption[]>(
+    options.items.filter(item => !rankedItems.includes(String(item.value)))
+  );
+
+  const addToRanking = (item: QuestionOption) => {
+    const newRanked = [...rankedItems, String(item.value)];
+    const newAvailable = availableItems.filter(i => i.value !== item.value);
+    
+    setRankedItems(newRanked);
+    setAvailableItems(newAvailable);
+    onChange(newRanked);
+  };
+
+  const removeFromRanking = (index: number) => {
+    const removedValue = rankedItems[index];
+    const removedItem = options.items.find(item => String(item.value) === removedValue);
+    
+    const newRanked = rankedItems.filter((_, i) => i !== index);
+    const newAvailable = removedItem ? [...availableItems, removedItem] : availableItems;
+    
+    setRankedItems(newRanked);
+    setAvailableItems(newAvailable);
+    onChange(newRanked);
+  };
+
+  const moveItem = (fromIndex: number, toIndex: number) => {
+    const newRanked = [...rankedItems];
+    const [movedItem] = newRanked.splice(fromIndex, 1);
+    newRanked.splice(toIndex, 0, movedItem);
+    
+    setRankedItems(newRanked);
+    onChange(newRanked);
+  };
+
+  return (
+    <Card className=\"w-full max-w-2xl mx-auto\">
+      <CardContent className=\"p-6\">
+        <div className=\"space-y-6\">
+          <div>
+            <h3 className=\"text-lg font-semibold text-foreground mb-2\">
+              {question.questionText}
+            </h3>
+            <p className=\"text-sm text-muted-foreground mb-4\">
+              Drag items to rank them in order of importance (most important first)
+            </p>
+            {question.isRequired && (
+              <p className=\"text-sm text-muted-foreground mb-4\">* Required</p>
+            )}
+          </div>
+
+          <div className=\"grid md:grid-cols-2 gap-6\">
+            {/* Available Items */}
+            <div>
+              <h4 className=\"font-medium mb-3\">Available Options</h4>
+              <div className=\"space-y-2\">
+                {availableItems.map((item) => (
+                  <Button
+                    key={item.value}
+                    variant=\"outline\"
+                    onClick={() => addToRanking(item)}
+                    disabled={isLoading}
+                    className=\"w-full text-left justify-start h-auto p-3\"
+                  >
+                    <div>
+                      <div className=\"font-medium\">{item.label}</div>
+                      {item.description && (
+                        <div className=\"text-xs text-muted-foreground mt-1\">
+                          {item.description}
+                        </div>
+                      )}
+                    </div>
+                  </Button>
+                ))}
+              </div>
+            </div>
+
+            {/* Ranked Items */}
+            <div>
+              <h4 className=\"font-medium mb-3\">Your Ranking</h4>
+              <div className=\"space-y-2\">
+                {rankedItems.map((value, index) => {
+                  const item = options.items.find(i => String(i.value) === value);
+                  return (
+                    <div
+                      key={value}
+                      className=\"flex items-center gap-2 p-3 bg-primary/5 border border-primary/20 rounded-lg\"
+                    >
+                      <span className=\"flex-shrink-0 w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-sm font-medium\">
+                        {index + 1}
+                      </span>
+                      <div className=\"flex-1 text-sm\">
+                        {item?.label}
+                      </div>
+                      <Button
+                        size=\"sm\"
+                        variant=\"ghost\"
+                        onClick={() => removeFromRanking(index)}
+                        disabled={isLoading}
+                        className=\"h-6 w-6 p-0\"
+                      >
+                        ×
+                      </Button>
+                    </div>
+                  );
+                })}
+                {rankedItems.length === 0 && (
+                  <p className=\"text-sm text-muted-foreground italic p-3 text-center border-2 border-dashed border-muted rounded-lg\">
+                    Click items from the left to add them to your ranking
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {showNavigation && (
+            <div className=\"flex justify-between pt-4\">
+              <Button
+                variant=\"outline\"
+                onClick={onPrevious}
+                disabled={isLoading}
+                className=\"rounded-full\"
+              >
+                Previous
+              </Button>
+              <Button
+                onClick={onNext}
+                disabled={isLoading || (question.isRequired && rankedItems.length === 0)}
+                className=\"rounded-full\"
+              >
+                Next
+              </Button>
+            </div>
+          )}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
